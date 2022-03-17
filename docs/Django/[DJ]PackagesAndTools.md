@@ -2,8 +2,6 @@
 
 ## Django Cookiecutter
 
-![](C:\Users\TzuHsuanYeh\Desktop\cookiecutter.png)
-
 github repo : [cookiecutter/cookiecutter-django: Cookiecutter Django is a framework for jumpstarting production-ready Django projects quickly. (github.com)](https://github.com/cookiecutter/cookiecutter-django)
 
 documents : [Getting Up and Running Locally — Cookiecutter Django 2022.11.2 documentation (cookiecutter-django.readthedocs.io)](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html)
