@@ -299,3 +299,9 @@ docker0		8000.0242c32a8c88	no
 ### 容器與外部網路
 
 docker0連接到各容器，而docker0又是與主機相通的，所以基本上可以存取到外部網路，但若是要由外往存取容器的話就要：通訊埠對應，也就是設定主機內某個通訊埠對應到容器的網路服務通訊埠，如此一來，使用者存取主機的指定通訊埠就可以了。
+
+`$ docker run --publish [host port]:[container port] IMAGE`
+
+例如要用IMAGE `python-docker`建立容器並向外連，python-docker的port是5000，本機是8000，所以要執行容器時用
+
+`$ docker run --publish 8000:5000 python-docker`
