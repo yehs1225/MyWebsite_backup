@@ -28,6 +28,8 @@ common conda command:
 - enter env  : `conda activate <'env_name'>`
 - leave env : `conda deactivate`
 
+if you are using VSCode, Ctrl + Shift + P -> Type and select 'Python: Select Interpreter' to change to the current environment. 
+
 ## Start using django
 
 - #### Build a project :`django-admin startproject mysite`
