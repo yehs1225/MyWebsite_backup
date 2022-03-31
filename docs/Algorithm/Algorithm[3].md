@@ -169,12 +169,13 @@ Bipartitie graph （bigraph）G = (X,Y,E) ，G當中的所有點可以被分為�
 
 我們知道bigraph中的每一條邊都連接不同集合的點，想像成將一端點塗為紅色、另一端點塗為藍色，那麼我們可以BFS的演算法來完成：從點s出發，遇到另一點就將其塗為紅色，遇到下一點再塗為藍色，再換回紅色....；或者也可以說是將點s塗為紅色、L1塗為藍色、L2塗為紅色...。
 
-再查看一次[一般的BFS演算法](https://yehs1225.github.io/docs/Algorithm/Graph#implement)。加上陣列Color[v]儲存每一點的顏色，當點v 被加入陣列L[i+1]時，若i+1為偶數則塗成紅色；奇數則塗為藍色，最後我們在檢查每條邊是否兩端都被塗上相異的顏色。時間複雜度和BFS一樣為O(M+N)。
+再查看一次[一般的BFS演算法](https://yehs1225.github.io/docs/Algorithm/Algorithm[3]#implement)。加上陣列Color[v]儲存每一點的顏色，當點v 被加入陣列L[i+1]時，若i+1為偶數則塗成紅色；奇數則塗為藍色，最後我們在檢查每條邊是否兩端都被塗上相異的顏色。時間複雜度和BFS一樣為O(M+N)。
 
 ```pseudocode
 BFS(s):
 	Set Discovered[s] = True and Discovered[v]=False for all other v
 	Initialize L[0] to consist of the single element s 
+	color[s] = red
     Set the layer counter i=0
     Set the current BFS tree T =  ∅
     While L[i] is not empty
@@ -185,7 +186,11 @@ BFS(s):
     			Set Discovered[v]=true
     			Add edge (u,v) to the tree T
     			Add v to the list L[i+1]
-    			
+    			If i+1 is even then
+    				color[v]=red
+    			Else 
+    				color[v]=blue
+    			EndIf
     		EndIf
    		EndFor
    		Increment the layer counter i by one
@@ -234,11 +239,13 @@ Else
 
 ##### Correctness
 
+(1)   Not strongly connected（return false）的正確性：
 
+以BFS對G及Grev 以點s為起始搜尋，若任一搜尋無法到達每一點，即違反strongly connected的定義，那麼此圖G必定不為strongly connected。
 
+(2)   strongly connected（return true）的正確性：
 
-
-
+以BFS對G及Grev 以點s為起始搜尋，s可到達每一點且每一點也能到達s，代表s到任一點u是mutually reachable，到任一點v也是mutually reachable，根據上面的定理可得在G中的任一兩點皆為mutually reachable，符合strongly connected的定義。
 
 ## Directed Acyclic Graphs and Topological Ordering
 
