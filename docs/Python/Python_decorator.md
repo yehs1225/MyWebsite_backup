@@ -1,4 +1,4 @@
-# Python - Decorator
+# Decorator
 
 學習資源 : [Corey]: https://www.youtube.com/c/Coreyms
 

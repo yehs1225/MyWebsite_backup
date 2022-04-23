@@ -1,4 +1,4 @@
-# Python - Class
+# Class
 
 學習資源:[Corey]: https://www.youtube.com/c/Coreyms
 
