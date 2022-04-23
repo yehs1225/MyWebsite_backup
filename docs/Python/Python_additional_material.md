@@ -10,14 +10,17 @@
 
 **Ex**
 
-有一檔案 < hello.py >內含一function `hello_message`
+- 有一檔案 < hello.py >內含一function `hello_message`
+
 
 ```python
 def hello_message(msg):
     print('Hello, {}'.format(msg))
 ```
 
-在其他檔案中import
+- 在其他檔案中import
+
+此外，`module.__file__`可以找到該module的所在位置。
 
 ```python
 # import method 1
@@ -39,7 +42,7 @@ hello_message('World')
 
 **Ex**
 
-package結構及引入
+package結構及引入方式
 
 ```bash
 ├── my_module
@@ -106,4 +109,74 @@ def foo(a: int, b: "this is b", c: str = 5) -> tuple:
 ```python
 foo.__annotations__
 ```
+
+## Booleans
+
+###  is
+
+比較**內容**的相異性用的是`==`；而`is`是用來比較**記憶體**位置是否相同。
+
+```python
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+print(a == b)
+# True
+
+print(a is b)
+# False
+
+# Print the memory location
+print(id(a))
+print(id(b))
+# 1679406415360
+# 1679409529472
+```
+
+```python
+a = [1, 2, 3]
+b = a
+
+print(a is b)
+# True
+```
+
+### False Value
+
+- False
+- None
+- Zero of any numeric type.
+- Any empty sequence. （e.g. `''`、`()`、`[]`）
+- Any empty mapping. （e.g.`{}`）
+
+## Loops
+
+### break&continue
+
+`break` : 離開迴圈。
+
+`continue` : 直接進入下一迴圈。
+
+```python
+nums = [1, 2, 3]
+
+for num in nums:
+    if num == 2:
+        print("Found!")
+        break
+    print(num)
+    # 1
+    # found!
+    
+for num in nums:
+    if num == 2:
+        print("Found!")
+        continue
+    print(num)
+    # 1
+    # Found!
+    # 3
+```
+
+
 
