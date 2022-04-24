@@ -1,8 +1,8 @@
-## Mutable & Immutable
+# Mutable & Immutable
 
 一個Immutable物件指的是它的狀態在建立之後不可被修改；Mutable物件可以被修改。
 
-### Immutable
+## Immutable
 
 1. Integers
 2. Float
@@ -36,7 +36,7 @@
   # TypeError: 'str' object does not support item assignment
   ```
 
-### Mutable
+## Mutable
 
 1. Lists
 2. Dictionaries
@@ -54,7 +54,7 @@ print(a)
 print(f'Adress: {id(a)}')
 ```
 
-### Why it's important
+## Why it's important
 
 其中一個例子：現在要將一list放入html的tag當中。
 
