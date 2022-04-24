@@ -1,4 +1,4 @@
-# Class
+# Python - Class
 
 學習資源:[Corey]: https://www.youtube.com/c/Coreyms
 
@@ -12,7 +12,7 @@
 
 ```python
 class Employee:
-    
+
     def __init__(self,first,last,pay):
         self.first = first
         self.last = last
@@ -37,24 +37,24 @@ print(emp_1.first)#Wendy
 print(emp_1.last)#Yeh
 ```
 
-## 建立 method 
+## 建立 method
 
 在class中除了`__init__`是必要的（定義此class），我們可以依照自身需求加入任何以此類別建立的物件都可以使用的方法（method）。首先，先看最基礎的範例（這裡稱之為regular，指的是一般的用法）。
 
 ### Regular
 
 - 建立一個回傳員工全名的method`fullname(self)`，在此也是以instance作為數入參數，並依慣例稱作`self`。
-
+  
   呼叫時和上面不同的地方在於，上面呼叫的`first`、`last`都是emp_1這個物件的attribute，而這裡是要呼叫物件的function `fullname`，所以是需要加上`()`的!
 
 ```python
 class Employee:
-    
+
     def __init__(self,first,last,pay):
         #...
     def fullname(self):
         return f"{} {}".format(self.first,self.last)
-    
+
 print(emp_1.fullname())#Wendy Yeh
 ```
 
@@ -65,7 +65,7 @@ print(emp_1.fullname())#Wendy Yeh
 - 加入`raise_amt`，代表加薪的乘數。
 
 - 希望特定員工有不同的數值，因此設定一method`set_raise_amt(self,amount)`，`self`和之前一樣是指instance，而`amount`是使用者輸入的。
-
+  
   更改並呼叫`emp_1`這個instance，可以發現已被更改成想要的1.05。查看class `Employee`可以發現還是原來的數值1.03，因為前面一直有提到一般的method都是**針對instance**去設定，當然跟本身的class無關。
 
 ```python
@@ -74,7 +74,7 @@ class Employee:
     #...
     def set_raise_amt(self,amount):
         self.raise_amt = amount
-        
+
 emp_1.set_raise_amt(1.05)
 print(emp_1.raise_amt)#1.05
 print(Employee.raise_amt)#1.03  
@@ -94,7 +94,7 @@ class Employee:
     @classmethod
     def set_raise_amt(cls,amount):
         self.raise_amt = amount
-        
+
 emp_1.set_raise_amt(1.05)
 print(emp_1.raise_amt)#1.05
 print(Employee.raise_amt)#1.05
@@ -113,7 +113,7 @@ class Employee:
         if day.weekday() == 5 or day.weekday() == 6:
             return False
         return True
-    
+
 import datetime
 my_date = datetime.date(2016,7,11)
 print(Employee.is_workday(my_date))
@@ -143,7 +143,7 @@ print(emp_1.__str__())
 這種方法其實你以前一定也用過，像是要 **相加數字、字串的add**、**計算字串長度的len**等，其實都是python對該變數類型定義好的dunder method，因此我們也可以自己幫Employee這個class加上。
 
 - `__add__`
-
+  
   ```python
   def __add__(self,other):
      return self.pay + other.pay
@@ -155,7 +155,7 @@ print(emp_1.__str__())
   ```
 
 - `__len__`
-
+  
   ```python
   def __len__(self):
      return len(self.fullname())
@@ -163,8 +163,6 @@ print(emp_1.__str__())
   emp_1 = Employee("Wendy","Yeh",90000)
   print(len(emp_1))
   ```
-
-  
 
 ## Inheritance & Subclass
 
@@ -174,7 +172,7 @@ print(emp_1.__str__())
 
 ```python
 class Employee:
-    
+
     raise_amount = 1.03
 
     def __init__(self,first,last,pay):
@@ -198,12 +196,12 @@ class Employee:
   - 和base class要有一樣設定的東西，我們就用`super()`來繼承，像這裡就是繼承了`__init__(first,last,pay)`這個方法及其參數設定。
   - 剩下的`prog_lang`就是一般的class設定，用`self.`設定給這個instance。
 
-​		可以看到除了本來直接以`Employee`建立的`emp_1`外（僅接收三個參數），可		以順利以`Developer`建立`dev_1`（多了一個參數）。再往下看，Developer我		們設定了不同的`raise_amount`值，並且呼叫method `raise_amount`，並不		會互相影響。
+​        可以看到除了本來直接以`Employee`建立的`emp_1`外（僅接收三個參數），可        以順利以`Developer`建立`dev_1`（多了一個參數）。再往下看，Developer我        們設定了不同的`raise_amount`值，並且呼叫method `raise_amount`，並不        會互相影響。
 
 ```python
 class Developer(Employee):
     raise_amount = 1.10
-    
+
     def __init__(self,first,last,pay,prog_lang):
         super().__init__(first,last,pay)
         self.prog_lang = prog_lang
@@ -233,19 +231,19 @@ class Manager(Employee):
             self.employees = []
         else:
             self.employees = employees
-        
+
     def add_emp(self,emp):
         if emp not in self.employees:
             self.employees.append(emp)
-    
+
     def remove_emp(self,emp):
         if emp in self.employees:
             self.employees.remove(emp)
-    
+
     def print_emps(self):
         for emp in self.employees:
             print('-->',emp.fullname())
-            
+
 emp_1 = Employee("Corey","Schafer",50000)
 dev_1 = Developer("Test","User",50000,"Python")
 
@@ -308,10 +306,10 @@ class Employee:
 
     def email(self):
         return "{}.{}@email.com".format(self.first,self.last)
-    
+
     def fullname(self):
         return "{} {}".format(self.first,self.last)
-    
+
 emp_1 = Employee("Wendy","Yeh")
 emp_1.first = 'Denny'
 
@@ -332,15 +330,15 @@ class Employee:
     def __init__(self,first,last):
         self.first = first
         self.last = last
-        
-	@property
+
+    @property
     def email(self):
         return "{}.{}@email.com".format(self.first,self.last)
 
     @property
     def fullname(self):
         return "{} {}".format(self.first,self.last)
-    
+
 emp_1 = Employee("Wendy","Yeh")
 emp_1.first = 'Denny'
 
@@ -363,13 +361,13 @@ AttributeError: can't set attribute
 @property
 def fullname(self):
     return "{} {}".format(self.first,self.last)
-    
+
 @fullname.setter
 def fullname(self,name):
     first, last = name.split(' ')
     self.first = first
     self.last = last
-    
+
 emp_1 = Employee("Wendy","Yeh")
 emp_1.fullname = 'Jim Lin'
 
@@ -417,3 +415,11 @@ print(emp_1.fullname)
 # None
 # None.None@email.com
 ```
+
+## Dunder or Magic method
+
+在python中dunder method 也稱為 magic method，指的是用前後`__`包裹住的method name。Dunder = Double Under（Underscores）。常用來作為operator overloading使用。一些範例像是 : `__init__`、`__add__`、`__len__`、`__repre__`等等。
+
+> #### operator overloading
+> 
+> 是多型（polymorphism）的一種，多行指的是位不同資料類型的實體提供統一的介面，或使用單一符號表是多個不同的類型。例如 : + 在Python可作用於 字串 和 數值上，且表現行為也會跟著調整，字串像是拼接、數值則是像 一般計算的方法。

@@ -1,4 +1,4 @@
-# Decorator
+# Python - Decorator
 
 學習資源 : [Corey]: https://www.youtube.com/c/Coreyms
 
@@ -243,5 +243,128 @@ def my_timer(orig_func):
     def wrapper(*args,**kwargs):
         #...
     return wrapper
+```
+
+### Decorator with arguments
+
+在使用decorator時也可以傳入參數，在一些framework中尤其常見。
+
+先看我們初始的decorator—作用為將該函數要回傳的值再乘以2。
+
+```python
+from functools import wraps
+
+
+def decorator_func(original_func):
+    @wraps(original_func)
+    def wrapper_func(*args, **kwargs):
+        print(f'Executed Before, {original_func.__name__}')
+        return 2*original_func(*args, **kwargs)
+    return wrapper_func
+
+
+@decorator_func
+def calculate_func(x):
+    return x+1
+
+
+print(calculate_func(3))
+# Executed Before, calculate_func
+# 8
+```
+
+現在加上前綴詞（prefix），在decorator中傳入。基本上就是再多一層，變成巢狀的decorator。
+
+```python
+from functools import wraps
+
+
+def prefix_decorator(prefix):
+    def decorator_func(original_func):
+        @wraps(original_func)
+        def wrapper_func(*args, **kwargs):
+            print(f'{prefix}: Executed Before, {original_func.__name__}')
+            return 2*original_func(*args, **kwargs)
+        return wrapper_func
+    return decorator_func
+
+
+@prefix_decorator('TEST')
+def calculate_func(x):
+    return x+1
+
+
+print(calculate_func(3))
+# TEST: Executed Before, calculate_func
+# 8
+```
+
+## 補充：Scope
+
+這裡牽扯到很多參數的傳遞，所以我們必須要了解Scope如何運作，才能正確地使用。
+
+LEGB，代表python會依序去察看變數的順序：
+
+1. Local
+2. Enclosing
+3. Global
+4. Built-in
+
+其中Enclosing就是上面Closure的概念。
+
+### Local & Global
+
+```python
+x = 'global x'
+
+def test():
+    x = 'local x'
+    print(x)
+
+test()
+print(x)
+# local x
+# global x
+```
+
+- `global`宣告為全域變數
+
+  所以`x = 'global x'`其實不需要了。但這並不是好的做法，會讓維持變數的作用愈變得很亂。
+
+  ```python
+  x = 'global x'
+  
+  def test():
+      global x
+      x = 'local x'
+      print(x)
+  
+  test()
+  print(x)
+  # local x
+  # local x
+  ```
+
+### Built-in
+
+一個Built-in例子是python內建的函式。
+
+`min()`可以取出list中最小值
+
+```python
+print(min([2,5,1,7]))
+# 1
+```
+
+依照LEGB的順序，若local定義了相同名稱的函式，就會優先選用。
+
+我們定義新的`min()`回傳第一個元素。
+
+```python
+def min(l):
+    return l[0]
+
+print(min([2,5,1,7]))
+# 2
 ```
 

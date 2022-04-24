@@ -21,21 +21,20 @@
 Ex : 印出 Amanda's cats
 
 1. 使用跳脫字元 `\`
-
+   
    ```python
    print('Amanda\'s cats')
    ```
 
 2. 外面用另一符號
-
+   
    ```python
    print("Amanda's cats")
    ```
-
 - 多行可用`""" """`
-
+  
   並且輸出會遵照數入格式
-
+  
   ```python
   print(
       """
@@ -47,7 +46,7 @@ Ex : 印出 Amanda's cats
 ### Modules
 
 - 長度 : `len()`
-
+  
   ```python
   message = 'Hello World'
   
@@ -55,7 +54,7 @@ Ex : 印出 Amanda's cats
   ```
 
 - 擷取字元 : `[]`
-
+  
   ```python
   message = 'Hello World'
   
@@ -68,7 +67,7 @@ Ex : 印出 Amanda's cats
 - 大寫 : `.upper()`
 
 - 數內含字元個數`.count('')`
-
+  
   ```python
   message = 'Hello World'
   
@@ -79,9 +78,9 @@ Ex : 印出 Amanda's cats
   ```
 
 - 找字元index
-
+  
   不存在的字元輸出是-1
-
+  
   ```python
   message = 'Hello World'
   
@@ -92,7 +91,7 @@ Ex : 印出 Amanda's cats
   ```
 
 - 替代成別的字元 : `.replace('original', 'new')` 
-
+  
   ```python
   message = 'Hello World'
   
@@ -106,30 +105,30 @@ Ex : 印出 Amanda's cats
   ```
 
 - 字串相加 
-
+  
   ```python
   greeting = 'Hi'
   name = 'John'
   ```
-
+  
   - with `+`
-
+    
     但是如果遇到較長的組合會很不方便，所以較不建議。
-
-      ```python
+    
+    ```python
     message = greeting + ', ' + name
-      ```
-
+    ```
+  
   - Format String : placeholder`{}` + `.format(var_1, var_2, ...)`
-
+    
     ```python
     message = '{}, {}. Welcome!'.format(greeting, name)
     ```
-
+  
   - f string : `f'{var_1}, {var_2}.`
-
+    
     是python3.6以上新增的，其一好處是在placeholder直接對變數操作時可讀性高，例如`name.upper()`
-
+    
     ```python
     message = f'{greeting}, {name}. Welcome!'
     ```
@@ -139,32 +138,32 @@ Ex : 印出 Amanda's cats
 ## 基本運算
 
 - Division : `/`
-
+  
   ```python
   print(3/2)
   # 1.5
   ```
-
+  
   在Python3以前會是1。
 
 - Floor  Division: `//`
-
-    ```python
-    print(3//2)
-    # 1
-    ```
+  
+  ```python
+  print(3//2)
+  # 1
+  ```
 
 - Exponent
-
+  
   ```python
   print(3 ** 2)
   # 9
   ```
 
 - Modulus
-
+  
   能用來確認是 奇數還是偶數
-
+  
   ```python
   print(5 % 2)
   # 1
@@ -175,10 +174,10 @@ Ex : 印出 Amanda's cats
 - 絕對值`abs()`
 
 - 近似值`round()`
-
+  
   - first arg : number
   - second : 要取到的位數
-
+  
   ```python
   print(round(3.65), 1)
   # 3.7
@@ -212,6 +211,42 @@ num_2 = int(num_2)
 print(num_1 + num_2)
 # 30
 ```
+
+## Booleans
+
+### is
+
+比較**內容**的相異性用的是`==`；而`is`是用來比較**記憶體**位置是否相同。
+
+```python
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+print(a == b)
+# True
+
+print(a is b)
+# False
+
+# Print the memory location
+print(id(a))
+print(id(b))
+# 1679406415360
+# 1679409529472
+a = [1, 2, 3]
+b = a
+
+print(a is b)
+# True
+```
+
+### False Value
+
+- False
+- None
+- Zero of any numeric type.
+- Any empty sequence. （e.g. `''`、`()`、`[]`）
+- Any empty mapping. （e.g.`{}`）
 
 ## List, Tuple, and Sets
 
@@ -309,28 +344,57 @@ set_1.difference(set_2)
 set_1.union(set_2)
 ```
 
+### namedtuple
+
+有點類似結合dictionary的tuple，享有tuple不可更動及dictionary可以有標籤的好處。來看一個範例：
+
+```python
+color = (255, 155, 55)
+```
+
+用tuple定義三原色組成橘色!但這樣的可讀性很低，別人可能會不知道255代表是紅色等等。所以我們改用dictionary試試。
+
+```python
+color = {'red': 255, 'green': 155, 'blue': 55}
+```
+
+這樣就好看多了，但是!如果要定義很多顏色，就要重複很多次這些較長的敘述，而且dictionary是可以被修改的，如果不小心被改，顏色就跑掉了!所以我們要來用namedtuple。
+
+```python
+from collections import namedtuple
+
+Color = namedtuple('Color', ['red', 'green', 'blue'])
+orange = Color(255, 155, 55) 
+
+print(orange)
+# Color(red=255, green=155, blue=55)
+
+print(orange.red)
+# 255
+```
+
 ## Dictionary
 
 ### Basic
 
 - setting
-
-    ```python
-    student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
-    ```
+  
+  ```python
+  student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
+  ```
 
 - get data
-
-    ```python
-    print(student)
-    # {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
-
-    print(student['name'])
-    # John
-    ```
+  
+  ```python
+  print(student)
+  # {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
+  
+  print(student['name'])
+  # John
+  ```
 
 - set data
-
+  
   ```python
   student['name'] = 'Wendy'
   print(student['name'])
@@ -340,7 +404,6 @@ set_1.union(set_2)
   print(student['phone'])
   # 1234-5678
   ```
-  
 
 ### Modules
 
@@ -349,9 +412,9 @@ student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
 ```
 
 - 取得某key對應的value : `dict.get()`
-
+  
   因為直接用`dict['key']`的方式若該key不存在，會出現KeyError，所以應用`dict.get()`
-
+  
   ```python
   print(student.get('phone'))
   # None
@@ -359,15 +422,15 @@ student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
   print(student.get('phone'), 'Not Found')
   # Not Found
   ```
-  
-- 更新 : `dict.update()`
 
+- 更新 : `dict.update()`
+  
   ```python
   student.update({'name': 'Wendy', 'age': 22, 'phone': '123-4567'})
   ```
 
 - 刪除 : `del dict['key']` or `dict.pop('key')`，pop會回傳值。
-
+  
   ```python
   # delete 'age' in dict
   del student['age']
@@ -383,19 +446,19 @@ student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
   ```
 
 - 長度`len(dict)`
-
+  
   ```python
   print(len(student))
   # 3
   ```
 
 - 取得keys : `dict.keys()` or loop
-
+  
   ```python
   print(student.keys())
   # dict_keys(['name', 'age', 'courses'])
   ```
-
+  
   ```python
   for key in student:
       print(key)
@@ -405,19 +468,19 @@ student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
   ```
 
 - 取得values : `dict.values()`
-
+  
   ```python
   print(student.values())
   # dict_values(['John', 25, ['Math', 'CompSci']])
   ```
 
 - 同時取得keys和values
-
+  
   ```python
   dict_values(['John', 25, ['Math', 'CompSci']])
   # dict_items([('name', 'John'), ('age', 25), ('courses', ['Math', 'CompSci'])])
   ```
-
+  
   ```python
   for key, value in student.items():
       print(key, value)
@@ -425,3 +488,32 @@ student = {'name': 'John', 'age': 25, 'courses': ['Math', 'CompSci']}
       # age 25
       # courses ['Math', 'CompSci']
   ```
+
+## Loops
+
+### break&continue
+
+`break` : 離開迴圈。
+
+`continue` : 直接進入下一迴圈。
+
+```python
+nums = [1, 2, 3]
+
+for num in nums:
+    if num == 2:
+        print("Found!")
+        break
+    print(num)
+    # 1
+    # found!
+
+for num in nums:
+    if num == 2:
+        print("Found!")
+        continue
+    print(num)
+    # 1
+    # Found!
+    # 3
+```
